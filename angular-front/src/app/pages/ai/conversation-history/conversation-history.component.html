@@ -1,0 +1,29 @@
+<app-page-breadcrumb pageTitle="AI Chat History" />
+
+<div class="space-y-4">
+  <div *ngFor="let convo of conversations">
+    <app-component-card [className]="'cursor-pointer hover:border-primary-300 transition-all'">
+      <div class="flex items-start justify-between">
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center text-primary-500 flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-gray-800 dark:text-white/90 line-clamp-1">"{{ convo.lastMessage }}"</h4>
+            <div class="flex items-center gap-3 mt-1.5">
+              <span class="text-xs text-gray-500">{{ convo.timestamp }}</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+              <span class="text-xs font-medium text-primary-600 dark:text-primary-400">{{ convo.sourceCount }} sources cited</span>
+            </div>
+          </div>
+        </div>
+        <a [routerLink]="['/ai/chat']" class="text-xs font-bold text-primary-500 uppercase tracking-wider hover:underline">Reopen</a>
+      </div>
+    </app-component-card>
+  </div>
+
+  <div *ngIf="!conversations.length" class="flex flex-col items-center justify-center h-64 text-gray-400">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mb-3 opacity-20"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    <p>No conversation history found.</p>
+  </div>
+</div>

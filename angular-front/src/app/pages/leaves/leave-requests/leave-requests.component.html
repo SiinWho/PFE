@@ -1,0 +1,53 @@
+<app-page-breadcrumb pageTitle="All Leave Requests" />
+
+<app-component-card title="Leave Requests">
+  <app-table className="w-full text-left">
+    <thead class="border-b border-gray-100 dark:border-gray-800">
+      <tr>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Employee</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Department</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Type</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Start</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">End</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Days</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Reason</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Status</th>
+        <th class="px-5 py-4 text-sm font-medium text-gray-500">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+      <app-table-row *ngFor="let req of requests" className="hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm font-medium text-gray-800 dark:text-white/90">{{ req.employee }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ req.department }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ req.type }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ req.startDate | date:'MMM d, y' }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ req.endDate | date:'MMM d, y' }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ req.days }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ req.reason }}</span>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <app-badge variant="light" size="sm" [color]="getStatusColor(req.status)">{{ req.status }}</app-badge>
+        </app-table-cell>
+        <app-table-cell className="px-5 py-4">
+          <div class="flex items-center gap-2">
+            <app-button size="sm" variant="primary" (btnClick)="approve(req.id)">Approve</app-button>
+            <app-button size="sm" variant="outline" (btnClick)="decline(req.id)">Decline</app-button>
+          </div>
+        </app-table-cell>
+      </app-table-row>
+    </tbody>
+  </app-table>
+</app-component-card>

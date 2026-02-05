@@ -1,0 +1,52 @@
+<app-page-breadcrumb pageTitle="AI HR Assistant" />
+
+<div class="h-[calc(100vh-280px)] min-h-[500px]">
+  <app-component-card title="Chat with AI" [className]="'h-full flex flex-col'">
+    <div class="flex-1 overflow-y-auto mb-6 space-y-4 pr-2 custom-scrollbar">
+      <div *ngFor="let msg of messages" class="flex" [ngClass]="{'justify-end': msg.sender === 'user'}">
+        <div class="max-w-[80%] flex items-start gap-3" [ngClass]="{'flex-row-reverse': msg.sender === 'user'}">
+          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs font-bold"
+               [ngClass]="msg.sender === 'ai' ? 'bg-primary-500' : 'bg-gray-500'">
+            {{ msg.sender === 'ai' ? 'AI' : 'ME' }}
+          </div>
+          <div class="p-3 rounded-2xl text-sm"
+               [ngClass]="msg.sender === 'ai' ? 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white/90 rounded-tl-none' : 'bg-primary-500 text-white rounded-tr-none'">
+            {{ msg.text }}
+            
+            <div *ngIf="msg.sources" class="mt-3 pt-2 border-t border-gray-200 dark:border-gray-700">
+              <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-1">Sources:</p>
+              <div *ngFor="let source of msg.sources" class="flex flex-col gap-1">
+                <div class="flex items-center justify-between text-[10px]">
+                  <span class="flex items-center gap-1 text-primary-600 dark:text-primary-400 font-medium">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    {{ source.document }} (p. {{ source.page }})
+                  </span>
+                  <span class="text-gray-400">Relevance: {{ source.relevance * 100 | number:'1.0-0' }}%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-[10px] mt-2 opacity-70 text-right">
+              {{ msg.timestamp | date:'shortTime' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-100 dark:border-gray-800">
+      <form (ngSubmit)="sendMessage()" class="flex gap-3">
+        <div class="flex-1">
+          <app-input-field
+            placeholder="Type your message..."
+            [value]="newMessage"
+            (valueChange)="handleValueChange($event)"
+          />
+        </div>
+        <app-button type="submit" [disabled]="!newMessage.trim()">
+          Send
+        </app-button>
+      </form>
+    </div>
+  </app-component-card>
+</div>

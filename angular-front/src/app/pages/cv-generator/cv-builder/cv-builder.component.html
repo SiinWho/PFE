@@ -1,0 +1,96 @@
+<app-page-breadcrumb pageTitle="AI CV Builder" />
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <div class="space-y-6">
+    <app-component-card title="Unified Corporate CV Settings">
+      <div class="space-y-5">
+        <div>
+          <app-label label="Target Position" />
+          <app-input-field 
+            placeholder="e.g. Senior Frontend Developer" 
+            [value]="cvData.targetPosition"
+            (valueChange)="handleValueChange($event)"
+          />
+          <p class="mt-1.5 text-xs text-gray-500">AI will optimize your profile data for this specific role.</p>
+        </div>
+
+        <div>
+          <app-label label="Upload Your Old CV" />
+          <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg dark:border-gray-800 transition-colors"
+               [ngClass]="fileName ? 'border-primary-500 bg-primary-50/10' : 'hover:border-primary-300'">
+            <div class="space-y-1 text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-400" [ngClass]="{'text-primary-500': fileName}" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <div class="flex text-sm text-gray-600 dark:text-gray-400 justify-center">
+                <label for="cv-upload" class="relative cursor-pointer bg-transparent rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-hidden">
+                  <span>{{ fileName ? 'Change file' : 'Upload a CV' }}</span>
+                  <input id="cv-upload" name="cv-upload" type="file" (change)="onFileSelected($event)" class="sr-only">
+                </label>
+                <p class="pl-1" *ngIf="!fileName">or drag and drop</p>
+              </div>
+              <p class="text-xs text-gray-500">{{ fileName || 'PDF or DOCX up to 10MB' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <app-label label="Key Skills to Prioritize" />
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button *ngFor="let skill of availableSkills"
+                    (click)="toggleSkill(skill)"
+                    [class]="'px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ' + (cvData.highlightSkills.includes(skill) ? 'bg-primary-50 border-primary-500 text-primary-600' : 'bg-white dark:bg-white/[0.03] border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400')">
+              {{ skill }}
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 dark:border-gray-800">
+          <app-button class="w-full" (click)="generateCV()" [disabled]="isGenerating || !cvData.targetPosition || !selectedFile">
+            <span *ngIf="!isGenerating">Generate Unified CV</span>
+            <span *ngIf="isGenerating" class="flex items-center gap-2">
+              <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              AI is extracting and unifying...
+            </span>
+          </app-button>
+        </div>
+      </div>
+    </app-component-card>
+  </div>
+
+  <div class="space-y-6">
+    <app-component-card title="Preview">
+      <div *ngIf="!cvGenerated && !isGenerating" class="flex flex-col items-center justify-center h-80 text-gray-400">
+        <svg class="w-16 h-16 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <p>Configure settings and click generate to see preview.</p>
+      </div>
+
+      <div *ngIf="isGenerating" class="space-y-4 h-80 flex flex-col justify-center px-10">
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-3/4 mb-4 animate-pulse"></div>
+        <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2 animate-pulse"></div>
+        <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-5/6 mb-2 animate-pulse"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-8 animate-pulse"></div>
+        
+        <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-1/2 mb-4 animate-pulse"></div>
+        <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2 animate-pulse"></div>
+        <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-3/4 mb-2 animate-pulse"></div>
+      </div>
+
+      <div *ngIf="cvGenerated && !isGenerating" class="space-y-6">
+        <div class="aspect-[1/1.4] bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-gray-800 rounded-xl p-6 flex flex-col items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center rotate-12">
+            <span class="text-4xl font-bold uppercase whitespace-nowrap">PREVIEW GENERATED BY AI</span>
+          </div>
+          <svg class="w-20 h-20 text-primary-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white/90">Unified CV Generated!</h3>
+          <p class="text-sm text-gray-500 text-center mt-2 max-w-[280px]">Your CV has been successfully transformed into the corporate standard for the <strong>{{ cvData.targetPosition }}</strong> position.</p>
+        </div>
+
+        <div class="flex gap-3">
+          <app-button variant="outline" class="flex-1" (click)="cvGenerated = false">Edit Data</app-button>
+          <app-button class="flex-1">Download PDF</app-button>
+        </div>
+      </div>
+    </app-component-card>
+  </div>
+</div>

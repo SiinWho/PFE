@@ -1,0 +1,24 @@
+<app-page-breadcrumb pageTitle="Skill Catalog" />
+
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+  <div *ngFor="let group of skillsByCategory">
+    <app-component-card [title]="group.category">
+      <div class="flex flex-wrap gap-2">
+        <div *ngFor="let skill of group.skills" 
+             class="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-white/[0.03] text-sm font-medium text-gray-700 dark:text-white/90">
+          <div class="flex items-center gap-2">
+            <span>{{ skill.name }}</span>
+            <span *ngIf="skill.subcategory" class="text-[10px] uppercase font-bold text-primary-500 bg-primary-50 dark:bg-primary-500/10 px-1.5 py-0.5 rounded">
+              {{ skill.subcategory }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
+        <app-button variant="outline" size="sm" class="w-full">
+          Add New {{ group.category }} Skill
+        </app-button>
+      </div>
+    </app-component-card>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<app-page-breadcrumb pageTitle="Role Permissions" />
+
+<app-component-card title="Roles Management">
+  <div class="mb-6 flex justify-end">
+    <app-button size="sm">Create New Role</app-button>
+  </div>
+
+  <div class="max-w-full overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="border-b border-gray-100 dark:border-gray-800">
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Role Name</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Description</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of rolesList" class="border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
+          <td class="px-5 py-4 text-sm font-medium text-gray-800 dark:text-white/90">
+            {{ role.name }}
+          </td>
+          <td class="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">
+            {{ role.description }}
+          </td>
+          <td class="px-5 py-4 text-sm">
+            <div class="flex items-center gap-3">
+              <button class="text-gray-500 hover:text-primary-500">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+              </button>
+              <button class="text-gray-500 hover:text-primary-500">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-component-card>

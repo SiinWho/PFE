@@ -1,0 +1,60 @@
+<app-page-breadcrumb pageTitle="Documents" />
+
+<app-component-card title="Document Management">
+  <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <app-button [routerLink]="['/documents/upload']" size="sm">
+        Upload Document
+      </app-button>
+    </div>
+  </div>
+
+  <div class="max-w-full overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="border-b border-gray-100 dark:border-gray-800">
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">File Name</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Category</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Uploaded By</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Version</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Date</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of documents" class="border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
+          <td class="px-5 py-4">
+            <div class="flex items-center gap-3">
+              <div class="p-2 bg-gray-100 dark:bg-gray-800 rounded">
+                <svg *ngIf="getFileIcon(doc.name) === 'pdf'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-error-500"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <svg *ngIf="getFileIcon(doc.name) !== 'pdf'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-500"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-gray-800 dark:text-white/90">{{ doc.name }}</span>
+                <span class="text-[10px] text-gray-500">{{ doc.size }}</span>
+              </div>
+            </div>
+          </td>
+          <td class="px-5 py-4 text-xs font-medium text-gray-600 dark:text-gray-400">
+            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded">{{ doc.path }}</span>
+          </td>
+          <td class="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">{{ doc.uploadedBy }}</td>
+          <td class="px-5 py-4">
+            <span class="text-xs font-bold text-primary-500 bg-primary-50 dark:bg-primary-500/10 px-2 py-1 rounded">{{ doc.version }}</span>
+          </td>
+          <td class="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">{{ doc.date | date:'MMM d, y' }}</td>
+          <td class="px-5 py-4 text-sm">
+            <div class="flex items-center gap-3">
+              <button [routerLink]="['/documents', doc.id]" class="text-gray-500 hover:text-primary-500">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+              <button class="text-gray-500 hover:text-primary-500">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-component-card>

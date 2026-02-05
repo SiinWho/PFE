@@ -1,0 +1,88 @@
+<app-page-breadcrumb [pageTitle]="isEditMode ? 'Edit Department' : 'Add Department'" />
+
+<app-component-card [title]="isEditMode ? 'Edit Department Details' : 'Add New Department'">
+  <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+      <!-- Department Code -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="code">Department Code</app-label>
+        <app-input-field
+          id="code"
+          placeholder="e.g. IT"
+          [value]="departmentForm.get('code')?.value"
+          (valueChange)="departmentForm.get('code')?.setValue($event)"
+          [error]="!!(departmentForm.get('code')?.touched && departmentForm.get('code')?.invalid)"
+          [hint]="departmentForm.get('code')?.touched && departmentForm.get('code')?.invalid ? 'Code is required' : ''"
+        />
+      </div>
+
+      <!-- Department Name -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="name">Department Name</app-label>
+        <app-input-field
+          id="name"
+          placeholder="e.g. Information Technology"
+          [value]="departmentForm.get('name')?.value"
+          (valueChange)="departmentForm.get('name')?.setValue($event)"
+          [error]="!!(departmentForm.get('name')?.touched && departmentForm.get('name')?.invalid)"
+          [hint]="departmentForm.get('name')?.touched && departmentForm.get('name')?.invalid ? 'Name is required' : ''"
+        />
+      </div>
+
+      <!-- Manager -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="manager">Manager</app-label>
+        <app-input-field
+          id="manager"
+          placeholder="Enter manager name"
+          [value]="departmentForm.get('manager')?.value"
+          (valueChange)="departmentForm.get('manager')?.setValue($event)"
+          [error]="!!(departmentForm.get('manager')?.touched && departmentForm.get('manager')?.invalid)"
+        />
+      </div>
+
+      <!-- Budget -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="budget">Annual Budget ($)</app-label>
+        <app-input-field
+          id="budget"
+          type="number"
+          placeholder="Enter budget"
+          [value]="departmentForm.get('budget')?.value"
+          (valueChange)="departmentForm.get('budget')?.setValue($event)"
+          [error]="!!(departmentForm.get('budget')?.touched && departmentForm.get('budget')?.invalid)"
+        />
+      </div>
+
+      <!-- Location -->
+      <div class="col-span-2">
+        <app-label for="location">Location</app-label>
+        <app-input-field
+          id="location"
+          placeholder="Enter location"
+          [value]="departmentForm.get('location')?.value"
+          (valueChange)="departmentForm.get('location')?.setValue($event)"
+          [error]="!!(departmentForm.get('location')?.touched && departmentForm.get('location')?.invalid)"
+        />
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
+      <app-button
+        type="button"
+        variant="outline"
+        size="sm"
+        (btnClick)="onCancel()"
+      >
+        Cancel
+      </app-button>
+      <app-button
+        type="submit"
+        size="sm"
+      >
+        {{ isEditMode ? 'Update Department' : 'Save Department' }}
+      </app-button>
+    </div>
+  </form>
+</app-component-card>

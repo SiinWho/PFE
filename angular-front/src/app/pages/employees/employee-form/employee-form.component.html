@@ -1,0 +1,105 @@
+<app-page-breadcrumb [pageTitle]="isEditMode ? 'Edit Employee' : 'Add Employee'" />
+
+<app-component-card [title]="isEditMode ? 'Edit Employee Details' : 'Add New Employee'">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+      <!-- Full Name -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="name">Full Name</app-label>
+        <app-input-field
+          id="name"
+          placeholder="Enter full name"
+          [value]="employeeForm.get('name')?.value"
+          (valueChange)="employeeForm.get('name')?.setValue($event)"
+          [error]="!!(employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid)"
+          [hint]="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid ? 'Name is required' : ''"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="email">Email Address</app-label>
+        <app-input-field
+          id="email"
+          type="email"
+          placeholder="Enter email address"
+          [value]="employeeForm.get('email')?.value"
+          (valueChange)="employeeForm.get('email')?.setValue($event)"
+          [error]="!!(employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid)"
+          [hint]="employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid ? 'Enter a valid email' : ''"
+        />
+      </div>
+
+      <!-- Role -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="role">Role</app-label>
+        <app-select
+          [options]="roles"
+          [value]="employeeForm.get('role')?.value"
+          (valueChange)="employeeForm.get('role')?.setValue($event)"
+        />
+      </div>
+
+      <!-- Department -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="department">Department</app-label>
+        <app-select
+          [options]="departments"
+          [value]="employeeForm.get('department')?.value"
+          (valueChange)="employeeForm.get('department')?.setValue($event)"
+        />
+      </div>
+
+      <!-- Status -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="status">Status</app-label>
+        <app-select
+          [options]="statusOptions"
+          [value]="employeeForm.get('status')?.value"
+          (valueChange)="employeeForm.get('status')?.setValue($event)"
+        />
+      </div>
+
+      <!-- Join Date -->
+      <div class="col-span-2 lg:col-span-1">
+        <app-label for="joinDate">Join Date</app-label>
+        <app-input-field
+          id="joinDate"
+          type="date"
+          [value]="employeeForm.get('joinDate')?.value"
+          (valueChange)="employeeForm.get('joinDate')?.setValue($event)"
+          [error]="!!(employeeForm.get('joinDate')?.touched && employeeForm.get('joinDate')?.invalid)"
+        />
+      </div>
+
+      <!-- Bio -->
+      <div class="col-span-2">
+        <app-label for="bio">Bio</app-label>
+        <app-input-field
+          id="bio"
+          placeholder="Enter employee bio"
+          [value]="employeeForm.get('bio')?.value"
+          (valueChange)="employeeForm.get('bio')?.setValue($event)"
+        />
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
+      <app-button
+        type="button"
+        variant="outline"
+        size="sm"
+        (btnClick)="onCancel()"
+      >
+        Cancel
+      </app-button>
+      <app-button
+        type="submit"
+        size="sm"
+      >
+        {{ isEditMode ? 'Update Employee' : 'Add Employee' }}
+      </app-button>
+    </div>
+  </form>
+</app-component-card>
