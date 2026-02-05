@@ -1,0 +1,67 @@
+# ==================================
+# ROOT PROJECT GITIGNORE
+# COLLABORATIVE TEAM DEVELOPMENT
+# ==================================
+
+# IDE and Editor files (each developer may use different tools)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# OS specific
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Environment files (each developer has their own)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# Documentation drafts (work in progress notes)
+*.draft.md
+notes.txt
+TODO.txt
+personal-notes/
+
+# Build outputs (general)
+dist/
+build/
+out/
+
+# Dependencies (if you have shared node_modules at root)
+node_modules/
+
+# Backup files
+*.bak
+*.backup
+*_backup/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Team collaboration - DO NOT IGNORE
+# README.md - KEEP
+# CONTRIBUTING.md - KEEP
+# .env.example - KEEP (template for team)
