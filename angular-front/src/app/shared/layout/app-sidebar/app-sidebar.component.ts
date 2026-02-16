@@ -46,7 +46,18 @@ export class AppSidebarComponent {
     {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V8H19M16 1V3H8V1H6V3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.89 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.89 20.11 3 19 3H18V1M17 12H12V17H17V12Z" fill="currentColor"/></svg>`,
       name: "Leaves",
-      path: "/leaves",
+      subItems: [
+        { name: "My Leaves", path: "/leaves" },
+        { name: "Management", path: "/leaves/management" },
+        { name: "Calendar", path: "/leaves/calendar" },
+        { name: "Types", path: "/leaves/types" }
+      ],
+    },
+    {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 11H7v2h2v-2m4 0h-2v2h2v-2m4 0h-2v2h2v-2m2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 16H5V9h14v11z" fill="currentColor"/></svg>`,
+      name: "Authorizations",
+      path: "/authorizations",
+      new: true
     },
     {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.11 4.89 22 6 22H18C19.11 22 20 21.11 20 20V8L14 2M13 9V3.5L18.5 9H13Z" fill="currentColor"/></svg>`,

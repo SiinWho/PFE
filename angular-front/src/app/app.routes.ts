@@ -158,10 +158,16 @@ export const routes: Routes = [
         path: 'leaves',
         children: [
           { path: '', component: LeaveListComponent, title: 'Leaves | ASM' },
+          { path: 'management', loadComponent: () => import('./pages/leaves/leave-management/leave-management.component').then(m => m.LeaveManagementComponent), title: 'Leave Management | ASM' },
           { path: 'calendar', component: LeaveCalendarComponent, title: 'Leave Calendar | ASM' },
           { path: 'types', component: LeaveTypesComponent, title: 'Leave Types | ASM' },
-          { path: 'requests', loadComponent: () => import('./pages/leaves/leave-requests/leave-requests.component').then(m => m.LeaveRequestsComponent), title: 'Leave Requests | ASM' },
           { path: ':id', component: LeaveDetailComponent, title: 'Leave Details | ASM' }
+        ]
+      },
+      {
+        path: 'authorizations',
+        children: [
+          { path: '', loadComponent: () => import('./pages/authorizations/authorization-list/authorization-list.component').then(m => m.AuthorizationListComponent), title: 'Authorizations | ASM' }
         ]
       },
       {

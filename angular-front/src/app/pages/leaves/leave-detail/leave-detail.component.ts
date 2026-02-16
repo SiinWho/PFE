@@ -41,12 +41,12 @@ export class LeaveDetailComponent implements OnInit {
       from: '2024-03-15',
       to: '2024-03-20',
       days: 5,
-      status: 'Approved',
+      status: 'Pending',
       reason: 'Family vacation trip to Hammamet.',
       submittedAt: '2024-03-01T10:00:00',
       approvalSteps: [
         { step: 'Manager Approval', actor: 'Sara Mansour', status: 'Approved', date: '2024-03-02 09:30' },
-        { step: 'HR Validation', actor: 'Admin', status: 'Approved', date: '2024-03-03 11:45' }
+        { step: 'HR Validation', actor: 'Admin', status: 'Pending' }
       ]
     };
   }

@@ -1,0 +1,119 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { PageBreadcrumbComponent } from '../../../shared/components/common/page-breadcrumb/page-breadcrumb.component';
+import { ComponentCardComponent } from '../../../shared/components/common/component-card/component-card.component';
+import { BadgeComponent } from '../../../shared/components/ui/badge/badge.component';
+import { ButtonComponent } from '../../../shared/components/ui/button/button.component';
+
+interface LeaveRequest {
+    id: number;
+    employee: string;
+    employeeId: number;
+    type: string;
+    from: string;
+    to: string;
+    days: number;
+    status: 'Approved' | 'Pending' | 'Rejected';
+    reason: string;
+    submittedAt: string;
+    currentApprover?: string;
+    balance: {
+        total: number;
+        used: number;
+        remaining: number;
+    };
+}
+
+@Component({
+    selector: 'app-leave-management',
+    standalone: true,
+    imports: [CommonModule, RouterLink, PageBreadcrumbComponent, ComponentCardComponent, BadgeComponent, ButtonComponent],
+    templateUrl: './leave-management.component.html',
+    styleUrl: './leave-management.component.css',
+})
+export class LeaveManagementComponent {
+    pendingRequests: LeaveRequest[] = [
+        {
+            id: 1,
+            employee: 'Ahmed Ben Ali',
+            employeeId: 1,
+            type: 'Annual',
+            from: '2024-03-15',
+            to: '2024-03-20',
+            days: 5,
+            status: 'Pending',
+            reason: 'Family vacation trip to Hammamet.',
+            submittedAt: '2024-03-01T10:00:00',
+            currentApprover: 'Sara Mansour (Manager)',
+            balance: { total: 21, used: 5, remaining: 16 }
+        },
+        {
+            id: 2,
+            employee: 'Sara Mansour',
+            employeeId: 2,
+            type: 'Sick',
+            from: '2024-03-10',
+            to: '2024-03-12',
+            days: 2,
+            status: 'Pending',
+            reason: 'Medical consultation',
+            submittedAt: '2024-03-08T14:30:00',
+            currentApprover: 'HR Department',
+            balance: { total: 10, used: 2, remaining: 8 }
+        },
+        {
+            id: 3,
+            employee: 'Leila Oueslati',
+            employeeId: 4,
+            type: 'Annual',
+            from: '2024-03-25',
+            to: '2024-03-29',
+            days: 5,
+            status: 'Pending',
+            reason: 'Personal matters',
+            submittedAt: '2024-03-12T09:15:00',
+            currentApprover: 'Sara Mansour (Manager)',
+            balance: { total: 21, used: 10, remaining: 11 }
+        }
+    ];
+
+    stats = {
+        pending: 3,
+        approved: 12,
+        rejected: 1,
+        avgProcessingTime: '1.5 days'
+    };
+
+    getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
+        switch (status) {
+            case 'Approved': return 'success';
+            case 'Pending': return 'warning';
+            case 'Rejected': return 'error';
+            default: return 'light';
+        }
+    }
+
+    approveRequest(id: number) {
+        const request = this.pendingRequests.find(r => r.id === id);
+        if (request) {
+            request.status = 'Approved';
+            console.log(`Approved leave request #${id}`);
+        }
+    }
+
+    rejectRequest(id: number) {
+        const request = this.pendingRequests.find(r => r.id === id);
+        if (request) {
+            request.status = 'Rejected';
+            console.log(`Rejected leave request #${id}`);
+        }
+    }
+
+    getBalanceStatus(balance: { remaining: number; total: number }): string {
+        const percentage = (balance.remaining / balance.total) * 100;
+        if (percentage < 20) return 'text-error-500';
+        if (percentage < 50) return 'text-warning-500';
+        return 'text-success-500';
+    }
+}
