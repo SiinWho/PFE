@@ -42,6 +42,11 @@ import { CvHistoryComponent } from './pages/cv-generator/cv-history/cv-history.c
 import { UsersComponent } from './pages/settings/users/users.component';
 import { RolesComponent } from './pages/settings/roles/roles.component';
 import { PermissionsComponent } from './pages/settings/permissions/permissions.component';
+import { LeaveManagementComponent } from './pages/leaves/leave-management/leave-management.component';
+import { BalanceDashboardComponent } from './pages/leaves/balance-dashboard/balance-dashboard.component';
+import { AuthorizationListComponent } from './pages/authorizations/authorization-list/authorization-list.component';
+import { FormBuilderComponent } from './pages/forms/form-builder/form-builder.component';
+import { WorkflowEditorComponent } from './pages/workflows/workflow-editor/workflow-editor.component';
 
 export const routes: Routes = [
   {
@@ -158,7 +163,8 @@ export const routes: Routes = [
         path: 'leaves',
         children: [
           { path: '', component: LeaveListComponent, title: 'Leaves | ASM' },
-          { path: 'management', loadComponent: () => import('./pages/leaves/leave-management/leave-management.component').then(m => m.LeaveManagementComponent), title: 'Leave Management | ASM' },
+          { path: 'management', component: LeaveManagementComponent, title: 'Leave Management | ASM' },
+          { path: 'balances', component: BalanceDashboardComponent, title: 'Balance Dashboard | ASM' },
           { path: 'calendar', component: LeaveCalendarComponent, title: 'Leave Calendar | ASM' },
           { path: 'types', component: LeaveTypesComponent, title: 'Leave Types | ASM' },
           { path: ':id', component: LeaveDetailComponent, title: 'Leave Details | ASM' }
@@ -167,7 +173,19 @@ export const routes: Routes = [
       {
         path: 'authorizations',
         children: [
-          { path: '', loadComponent: () => import('./pages/authorizations/authorization-list/authorization-list.component').then(m => m.AuthorizationListComponent), title: 'Authorizations | ASM' }
+          { path: '', component: AuthorizationListComponent, title: 'Authorizations | ASM' }
+        ]
+      },
+      {
+        path: 'forms',
+        children: [
+          { path: 'builder', component: FormBuilderComponent, title: 'Form Builder | ASM' }
+        ]
+      },
+      {
+        path: 'workflows',
+        children: [
+          { path: 'editor', component: WorkflowEditorComponent, title: 'Workflow Editor | ASM' }
         ]
       },
       {

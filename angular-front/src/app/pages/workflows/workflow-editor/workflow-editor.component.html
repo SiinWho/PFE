@@ -1,0 +1,226 @@
+<app-page-breadcrumb pageTitle="Éditeur de Workflows d'Approbation" />
+
+<!-- Workflow Templates List -->
+<div *ngIf="!currentWorkflow" class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white/90">Workflows Configurables</h2>
+      <p class="text-sm text-gray-500 mt-1">Créez et personnalisez les circuits de validation</p>
+    </div>
+    <app-button (btnClick)="createNewWorkflow()">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      Nouveau Workflow
+    </app-button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div *ngFor="let workflow of workflows" 
+         class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] p-6 hover:shadow-lg transition-all">
+      <div class="flex items-start justify-between mb-4">
+        <div class="flex-1">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-white/90">{{ workflow.name }}</h3>
+          <p class="text-xs text-gray-500 mt-1">{{ workflow.category }}</p>
+        </div>
+        <app-badge [color]="getStatusColor(workflow.status)" size="sm">{{ workflow.status }}</app-badge>
+      </div>
+
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">{{ workflow.description }}</p>
+
+      <!-- Workflow Preview -->
+      <div class="mb-4 p-4 bg-gray-50 dark:bg-white/[0.02] rounded-lg">
+        <div class="flex items-center gap-2 overflow-x-auto">
+          <div *ngFor="let node of workflow.nodes; let i = index" class="flex items-center gap-2 flex-shrink-0">
+            <div class="flex flex-col items-center">
+              <div [ngClass]="getNodeColor(node.type)" 
+                   class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold shadow-md">
+                {{ i + 1 }}
+              </div>
+              <span class="text-xs text-gray-600 dark:text-gray-400 mt-1 max-w-[80px] truncate">{{ node.label }}</span>
+            </div>
+            <svg *ngIf="i < workflow.nodes.length - 1" class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2 mb-4">
+        <div class="flex items-center gap-2 text-xs text-gray-500">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+          <span>{{ workflow.nodes.length }} étapes</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-gray-500">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>Mis à jour {{ workflow.updatedAt | date:'short' }}</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button (click)="editWorkflow(workflow)" 
+                class="flex-1 px-3 py-2 text-sm font-medium text-primary-600 bg-primary-50 dark:bg-primary-500/10 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-500/20 transition-colors">
+          Modifier
+        </button>
+        <button (click)="duplicateWorkflow(workflow)"
+                class="px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+          </svg>
+        </button>
+        <button (click)="archiveWorkflow(workflow)" *ngIf="workflow.status !== 'Archived'"
+                class="px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Workflow Editor -->
+<div *ngIf="currentWorkflow" class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white/90">
+        {{ isCreatingNew ? 'Nouveau Workflow' : 'Modifier le Workflow' }}
+      </h2>
+      <p class="text-sm text-gray-500 mt-1">Configurez les étapes et les approbateurs</p>
+    </div>
+    <div class="flex gap-3">
+      <app-button (btnClick)="cancelEdit()" variant="outline">Annuler</app-button>
+      <app-button (btnClick)="saveWorkflow()">Enregistrer</app-button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Node Palette -->
+    <app-component-card title="Types de Nœuds" class="lg:col-span-1">
+      <div class="space-y-2">
+        <p class="text-xs text-gray-500 mb-4">Ajoutez des étapes au workflow</p>
+        <button *ngFor="let nodeType of availableNodeTypes"
+                (click)="addNode(nodeType)"
+                [ngClass]="nodeType.color"
+                class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:opacity-90 transition-all shadow-md">
+          <span class="text-2xl">{{ nodeType.icon }}</span>
+          <span class="text-sm font-medium">{{ nodeType.label }}</span>
+        </button>
+      </div>
+    </app-component-card>
+
+    <!-- Workflow Canvas -->
+    <div class="lg:col-span-2">
+      <app-component-card title="Conception Visuelle">
+        <!-- Workflow Metadata -->
+        <div class="grid grid-cols-1 gap-4 mb-6 pb-6 border-b border-gray-100 dark:border-gray-800">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Nom du workflow</label>
+            <input type="text" [(ngModel)]="currentWorkflow.name"
+                   class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-gray-800 dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-primary-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Catégorie</label>
+            <select [(ngModel)]="currentWorkflow.category"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-gray-800 dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-primary-500">
+              <option value="">Sélectionner...</option>
+              <option value="Congés">Congés</option>
+              <option value="Autorisations">Autorisations</option>
+              <option value="Formation">Formation</option>
+              <option value="Logistique">Logistique</option>
+              <option value="RH">RH</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Description</label>
+            <textarea [(ngModel)]="currentWorkflow.description" rows="2"
+                      class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-gray-800 dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+          </div>
+        </div>
+
+        <!-- Visual Workflow -->
+        <div class="space-y-4">
+          <h3 class="text-sm font-semibold text-gray-700 dark:text-white/90">Étapes du workflow</h3>
+          <div class="flex items-center gap-3 overflow-x-auto pb-4">
+            <div *ngFor="let node of currentWorkflow.nodes; let i = index" class="flex items-center gap-3 flex-shrink-0">
+              <div (click)="selectNode(node)" 
+                   [ngClass]="[getNodeColor(node.type), selectedNode?.id === node.id ? 'ring-4 ring-primary-300' : '']"
+                   class="relative w-20 h-20 rounded-xl flex flex-col items-center justify-center text-white font-bold shadow-lg cursor-pointer hover:scale-105 transition-transform">
+                <span class="text-2xl mb-1">{{ i + 1 }}</span>
+                <span class="text-[10px] text-center px-1">{{ node.label }}</span>
+                <button *ngIf="node.type !== 'start' && node.type !== 'end'"
+                        (click)="deleteNode(node.id); $event.stopPropagation()"
+                        class="absolute -top-2 -right-2 w-6 h-6 bg-error-500 rounded-full flex items-center justify-center hover:bg-error-600">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <svg *ngIf="i < currentWorkflow.nodes.length - 1" class="w-8 h-8 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </app-component-card>
+    </div>
+
+    <!-- Node Configuration -->
+    <app-component-card title="Configuration du Nœud" class="lg:col-span-1">
+      <div *ngIf="selectedNode" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Label</label>
+          <input type="text" [(ngModel)]="selectedNode.label"
+                 class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-sm">
+        </div>
+
+        <div *ngIf="selectedNode.type === 'approval'">
+          <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Approbateur</label>
+          <select [(ngModel)]="selectedNode.approver"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-sm">
+            <option *ngFor="let approver of availableApprovers" [value]="approver">{{ approver }}</option>
+          </select>
+        </div>
+
+        <div *ngIf="selectedNode.type === 'condition'">
+          <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Condition</label>
+          <input type="text" [(ngModel)]="selectedNode.condition" placeholder="Ex: budget > 1000"
+                 class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-sm">
+        </div>
+
+        <div *ngIf="selectedNode.type === 'approval'">
+          <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Actions disponibles</label>
+          <div class="space-y-2">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" checked disabled class="rounded">
+              <span class="text-sm">Approuver</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" checked disabled class="rounded">
+              <span class="text-sm">Rejeter</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="rounded">
+              <span class="text-sm">Demander modification</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="rounded">
+              <span class="text-sm">Transférer</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!selectedNode" class="text-center py-8">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+        </svg>
+        <p class="mt-4 text-sm text-gray-500">Sélectionnez un nœud pour le configurer</p>
+      </div>
+    </app-component-card>
+  </div>
+</div>

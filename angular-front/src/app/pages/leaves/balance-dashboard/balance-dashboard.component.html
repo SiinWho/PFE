@@ -1,0 +1,212 @@
+<app-page-breadcrumb pageTitle="Tableau de Bord des Soldes" />
+
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-6">
+  <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Employés</p>
+        <p class="text-3xl font-bold text-gray-800 dark:text-white/90 mt-2">{{ stats.totalEmployees }}</p>
+      </div>
+      <div class="w-12 h-12 rounded-full bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center">
+        <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Utilisation Moy.</p>
+        <p class="text-3xl font-bold text-success-500 mt-2">{{ stats.avgUtilization }}%</p>
+      </div>
+      <div class="w-12 h-12 rounded-full bg-success-50 dark:bg-success-500/10 flex items-center justify-center">
+        <svg class="w-6 h-6 text-success-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Soldes Faibles</p>
+        <p class="text-3xl font-bold text-warning-500 mt-2">{{ stats.lowBalanceCount }}</p>
+      </div>
+      <div class="w-12 h-12 rounded-full bg-warning-50 dark:bg-warning-500/10 flex items-center justify-center">
+        <svg class="w-6 h-6 text-warning-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Critiques</p>
+        <p class="text-3xl font-bold text-error-500 mt-2">{{ stats.criticalBalanceCount }}</p>
+      </div>
+      <div class="w-12 h-12 rounded-full bg-error-50 dark:bg-error-500/10 flex items-center justify-center">
+        <svg class="w-6 h-6 text-error-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">En Attente</p>
+        <p class="text-3xl font-bold text-primary-500 mt-2">{{ stats.totalPending }}</p>
+      </div>
+      <div class="w-12 h-12 rounded-full bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center">
+        <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filters and Actions -->
+<div class="flex flex-col sm:flex-row gap-4 mb-6">
+  <select [(ngModel)]="filterDepartment" class="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03]">
+    <option value="">Tous les départements</option>
+    <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+  </select>
+  
+  <select [(ngModel)]="filterStatus" class="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03]">
+    <option value="">Tous les statuts</option>
+    <option value="Normal">Normal</option>
+    <option value="Low">Faible</option>
+    <option value="Critical">Critique</option>
+  </select>
+
+  <div class="flex-1"></div>
+  
+  <app-button (btnClick)="exportBalances()" variant="outline" size="sm">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+    </svg>
+    Exporter
+  </app-button>
+</div>
+
+<!-- Balances Table -->
+<app-component-card title="Soldes par Employé">
+  <div class="max-w-full overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="border-b border-gray-100 dark:border-gray-800">
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Employé</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Type</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Total</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Utilisé</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Restant</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">En Attente</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Utilisation</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let balance of filteredBalances" 
+            class="border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
+          <td class="px-5 py-4">
+            <div class="text-sm font-medium text-gray-800 dark:text-white/90">{{ balance.employeeName }}</div>
+            <div class="text-xs text-gray-500">{{ balance.department }}</div>
+          </td>
+          <td class="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">{{ balance.leaveType }}</td>
+          <td class="px-5 py-4 text-sm font-medium text-gray-800 dark:text-white/90">{{ balance.total }}</td>
+          <td class="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">{{ balance.used }}</td>
+          <td class="px-5 py-4 text-sm font-semibold" [ngClass]="getUtilizationColor(getUtilizationPercentage(balance))">
+            {{ balance.remaining }}
+          </td>
+          <td class="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">{{ balance.pending }}</td>
+          <td class="px-5 py-4">
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div [style.width.%]="getUtilizationPercentage(balance)" 
+                     [ngClass]="getUtilizationPercentage(balance) >= 90 ? 'bg-error-500' : getUtilizationPercentage(balance) >= 70 ? 'bg-warning-500' : 'bg-success-500'"
+                     class="h-full transition-all"></div>
+              </div>
+              <span class="text-xs text-gray-500 w-10">{{ getUtilizationPercentage(balance) }}%</span>
+            </div>
+          </td>
+          <td class="px-5 py-4">
+            <app-badge [color]="getStatusColor(balance.status)" size="sm">{{ balance.status }}</app-badge>
+          </td>
+          <td class="px-5 py-4">
+            <button (click)="openAdjustmentModal(balance)" 
+                    class="text-primary-500 hover:text-primary-600 text-sm font-medium">
+              Ajuster
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-component-card>
+
+<!-- Adjustment History -->
+<app-component-card title="Historique des Ajustements" class="mt-6">
+  <div class="space-y-3">
+    <div *ngFor="let adj of adjustmentHistory" 
+         class="flex items-center justify-between p-4 rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-white/[0.02]">
+      <div class="flex-1">
+        <div class="flex items-center gap-3">
+          <span class="text-sm font-medium text-gray-800 dark:text-white/90">{{ adj.employeeName }}</span>
+          <span class="text-xs text-gray-500">{{ adj.leaveType }}</span>
+          <app-badge [color]="adj.amount > 0 ? 'success' : 'error'" size="sm">
+            {{ adj.amount > 0 ? '+' : '' }}{{ adj.amount }} jours
+          </app-badge>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">{{ adj.reason }}</p>
+      </div>
+      <div class="text-right">
+        <p class="text-xs text-gray-500">Par {{ adj.adjustedBy }}</p>
+        <p class="text-xs text-gray-400">{{ adj.date | date:'short' }}</p>
+      </div>
+    </div>
+  </div>
+</app-component-card>
+
+<!-- Adjustment Modal -->
+<div *ngIf="showAdjustmentModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-md w-full p-6">
+    <h3 class="text-xl font-bold text-gray-800 dark:text-white/90 mb-4">Ajuster le Solde</h3>
+    
+    <div class="space-y-4 mb-6">
+      <div>
+        <p class="text-sm text-gray-500">Employé</p>
+        <p class="text-base font-medium text-gray-800 dark:text-white/90">{{ selectedBalance?.employeeName }}</p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Type de congé</p>
+        <p class="text-base font-medium text-gray-800 dark:text-white/90">{{ selectedBalance?.leaveType }}</p>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Ajustement (jours)</label>
+        <input type="number" [(ngModel)]="adjustmentAmount" 
+               class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03]"
+               placeholder="Ex: +2 ou -1">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Justification *</label>
+        <textarea [(ngModel)]="adjustmentReason" rows="3"
+                  class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03]"
+                  placeholder="Raison de l'ajustement..."></textarea>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <app-button (btnClick)="closeAdjustmentModal()" variant="outline" class="flex-1">Annuler</app-button>
+      <app-button (btnClick)="saveAdjustment()" [disabled]="!adjustmentReason" class="flex-1">Enregistrer</app-button>
+    </div>
+  </div>
+</div>

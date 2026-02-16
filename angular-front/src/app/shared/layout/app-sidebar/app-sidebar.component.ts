@@ -49,6 +49,7 @@ export class AppSidebarComponent {
       subItems: [
         { name: "My Leaves", path: "/leaves" },
         { name: "Management", path: "/leaves/management" },
+        { name: "Balances", path: "/leaves/balances", new: true },
         { name: "Calendar", path: "/leaves/calendar" },
         { name: "Types", path: "/leaves/types" }
       ],
@@ -63,6 +64,18 @@ export class AppSidebarComponent {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.11 4.89 22 6 22H18C19.11 22 20 21.11 20 20V8L14 2M13 9V3.5L18.5 9H13Z" fill="currentColor"/></svg>`,
       name: "Documents",
       path: "/documents",
+    },
+    {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" fill="currentColor"/></svg>`,
+      name: "Form Builder",
+      path: "/forms/builder",
+      new: true
+    },
+    {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 10V3L4 14h7v7l9-11h-7z" fill="currentColor"/></svg>`,
+      name: "Workflows",
+      path: "/workflows/editor",
+      new: true
     },
     {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5V15C21 17.2 19.2 19 17 19H7C4.8 19 3 17.2 3 15V7C3 4.8 4.8 3 7 3H12.5C12.2 3.6 12 4.3 12 5C12 7.8 14.2 10 17 10C17.7 10 18.4 9.8 19 9.5C19.3 10.1 19.5 10.8 19.5 11.5H21ZM17 4V2H19V4H21V6H19V8H17V6H15V4H17Z" fill="currentColor"/></svg>`,
