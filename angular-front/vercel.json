@@ -1,5 +1,4 @@
 {
-    "public": "dist/ng-tailadmin",
     "cleanUrls": true,
     "rewrites": [
         {
