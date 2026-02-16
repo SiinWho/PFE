@@ -13,7 +13,7 @@ interface LeaveRequest {
   from: string;
   to: string;
   days: number;
-  status: 'Approved' | 'Pending' | 'Rejected';
+  status: 'Approuvé' | 'En attente' | 'Rejeté';
 }
 
 interface LeaveBalance {
@@ -33,20 +33,20 @@ interface LeaveBalance {
 })
 export class LeaveListComponent {
   leaves: LeaveRequest[] = [
-    { id: 1, employee: 'Ahmed Ben Ali', type: 'Annual', from: '2024-03-15', to: '2024-03-20', days: 5, status: 'Pending' },
-    { id: 2, employee: 'Sara Mansour', type: 'Sick', from: '2024-03-10', to: '2024-03-12', days: 2, status: 'Pending' }
+    { id: 1, employee: 'Ahmed Ben Ali', type: 'Annuel', from: '2024-03-15', to: '2024-03-20', days: 5, status: 'En attente' },
+    { id: 2, employee: 'Sara Mansour', type: 'Maladie', from: '2024-03-10', to: '2024-03-12', days: 2, status: 'En attente' }
   ];
 
   leaveBalances: LeaveBalance[] = [
-    { employeeId: 1, type: 'Annual', total: 21, used: 5, remaining: 16 },
-    { employeeId: 1, type: 'Sick', total: 10, used: 0, remaining: 10 }
+    { employeeId: 1, type: 'Annuel', total: 21, used: 5, remaining: 16 },
+    { employeeId: 1, type: 'Maladie', total: 10, used: 0, remaining: 10 }
   ];
 
   getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
     switch (status) {
-      case 'Approved': return 'success';
-      case 'Pending': return 'warning';
-      case 'Rejected': return 'error';
+      case 'Approuvé': return 'success';
+      case 'En attente': return 'warning';
+      case 'Rejeté': return 'error';
       default: return 'light';
     }
   }

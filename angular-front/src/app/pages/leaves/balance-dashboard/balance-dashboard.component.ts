@@ -18,7 +18,7 @@ interface EmployeeBalance {
     pending: number;
     carryover: number;
     lastModified: string;
-    status: 'Normal' | 'Low' | 'Critical' | 'Exceeded';
+    status: 'Normal' | 'Faible' | 'Critique' | 'Dépassé';
 }
 
 interface BalanceAdjustment {
@@ -45,20 +45,20 @@ export class BalanceDashboardComponent {
             employeeId: 1,
             employeeName: 'Ahmed Ben Ali',
             department: 'IT',
-            leaveType: 'Annual',
+            leaveType: 'Annuel',
             total: 21,
             used: 15,
             remaining: 6,
             pending: 5,
             carryover: 0,
             lastModified: '2024-03-01T10:00:00',
-            status: 'Low'
+            status: 'Faible'
         },
         {
             employeeId: 1,
             employeeName: 'Ahmed Ben Ali',
             department: 'IT',
-            leaveType: 'Sick',
+            leaveType: 'Maladie',
             total: 10,
             used: 2,
             remaining: 8,
@@ -71,7 +71,7 @@ export class BalanceDashboardComponent {
             employeeId: 2,
             employeeName: 'Sara Mansour',
             department: 'RH',
-            leaveType: 'Annual',
+            leaveType: 'Annuel',
             total: 21,
             used: 8,
             remaining: 13,
@@ -84,20 +84,20 @@ export class BalanceDashboardComponent {
             employeeId: 3,
             employeeName: 'Mohamed Trabelsi',
             department: 'Finance',
-            leaveType: 'Annual',
+            leaveType: 'Annuel',
             total: 21,
             used: 20,
             remaining: 1,
             pending: 3,
             carryover: 0,
             lastModified: '2024-03-10T11:00:00',
-            status: 'Critical'
+            status: 'Critique'
         },
         {
             employeeId: 4,
             employeeName: 'Leila Oueslati',
             department: 'Marketing',
-            leaveType: 'Annual',
+            leaveType: 'Annuel',
             total: 21,
             used: 10,
             remaining: 11,
@@ -113,7 +113,7 @@ export class BalanceDashboardComponent {
             id: 1,
             employeeId: 1,
             employeeName: 'Ahmed Ben Ali',
-            leaveType: 'Annual',
+            leaveType: 'Annuel',
             amount: 2,
             reason: 'Compensation pour heures supplémentaires',
             adjustedBy: 'Admin RH',
@@ -123,7 +123,7 @@ export class BalanceDashboardComponent {
             id: 2,
             employeeId: 3,
             employeeName: 'Mohamed Trabelsi',
-            leaveType: 'Sick',
+            leaveType: 'Maladie',
             amount: -1,
             reason: 'Correction erreur de saisie',
             adjustedBy: 'Admin RH',
@@ -149,9 +149,9 @@ export class BalanceDashboardComponent {
     getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
         switch (status) {
             case 'Normal': return 'success';
-            case 'Low': return 'warning';
-            case 'Critical': return 'error';
-            case 'Exceeded': return 'error';
+            case 'Faible': return 'warning';
+            case 'Critique': return 'error';
+            case 'Dépassé': return 'error';
             default: return 'light';
         }
     }

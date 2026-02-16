@@ -1,15 +1,15 @@
-<app-page-breadcrumb pageTitle="Leave Requests" />
+<app-page-breadcrumb pageTitle="Demandes de Congés" />
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-6">
   <div *ngFor="let balance of leaveBalances" class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
     <div class="flex items-center justify-between mb-4">
-      <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ balance.type }} Leave</span>
-      <app-badge color="light">{{ balance.remaining }} Left</app-badge>
+      <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Congé {{ balance.type }}</span>
+      <app-badge color="light">{{ balance.remaining }} Restant(s)</app-badge>
     </div>
     <div class="flex items-end justify-between mt-2">
       <div>
         <p class="text-2xl font-bold text-gray-800 dark:text-white/90">{{ balance.used }}/{{ balance.total }}</p>
-        <p class="text-xs text-gray-500 mt-1">Days Used</p>
+        <p class="text-xs text-gray-500 mt-1">Jours Utilisés</p>
       </div>
       <div class="w-16 h-1 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden ml-4 mb-2">
         <div class="h-full bg-primary-500" [style.width.%]="(balance.used / balance.total) * 100"></div>
@@ -18,14 +18,14 @@
   </div>
 </div>
 
-<app-component-card title="Leave List">
+<app-component-card title="Liste des Congés">
   <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
     <div class="flex items-center gap-3">
       <app-button [routerLink]="['/leaves/calendar']" variant="outline" size="sm">
-        View Calendar
+        Voir Calendrier
       </app-button>
       <app-button [routerLink]="['/leaves/types']" variant="outline" size="sm">
-        Leave Types
+        Types de Congés
       </app-button>
     </div>
   </div>
@@ -34,11 +34,11 @@
     <table class="w-full text-left border-collapse">
       <thead>
         <tr class="border-b border-gray-100 dark:border-gray-800">
-          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Employee</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Employé</th>
           <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Type</th>
-          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Days</th>
-          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Durée</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Jours</th>
+          <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Statut</th>
           <th class="px-5 py-4 text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
         </tr>
       </thead>

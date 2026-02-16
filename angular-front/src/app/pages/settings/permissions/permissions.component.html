@@ -1,4 +1,4 @@
-<app-page-breadcrumb pageTitle="Role Permissions" />
+<app-page-breadcrumb pageTitle="Permissions par Rôle" />
 
 <div class="space-y-6 relative pb-10">
   <div *ngFor="let role of roles; let i = index">
@@ -9,10 +9,10 @@
       </svg>
     </div>
 
-    <app-component-card [title]="role.role + ' Level Permissions'" [className]="'relative shadow-sm hover:shadow-md transition-shadow'">
+    <app-component-card [title]="'Permissions ' + role.role" [className]="'relative shadow-sm hover:shadow-md transition-shadow'">
       <div class="absolute top-4 right-4">
         <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded bg-primary-50 dark:bg-primary-500/10 text-primary-500">
-          Rank: {{ roles.length - i }}
+          Rang: {{ roles.length - i }}
         </span>
       </div>
       

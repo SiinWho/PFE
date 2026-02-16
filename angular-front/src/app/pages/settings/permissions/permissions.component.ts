@@ -17,20 +17,20 @@ interface RolePermission {
 export class PermissionsComponent {
   roles: RolePermission[] = [
     {
-      role: 'Admin',
-      permissions: ['manage_users', 'manage_all_employees', 'approve_all_leaves', 'access_all_documents', 'system_config']
+      role: 'Administrateur',
+      permissions: ['gérer_utilisateurs', 'gérer_tous_employés', 'approuver_tous_congés', 'accéder_tous_documents', 'config_système']
     },
     {
-      role: 'HR',
-      permissions: ['manage_employees', 'manage_leaves', 'access_hr_documents', 'generate_reports']
+      role: 'RH',
+      permissions: ['gérer_employés', 'gérer_congés', 'accès_documents_rh', 'générer_rapports']
     },
     {
       role: 'Manager',
-      permissions: ['view_team', 'approve_team_leaves', 'view_team_documents']
+      permissions: ['voir_équipe', 'approuver_congés_équipe', 'voir_documents_équipe']
     },
     {
-      role: 'Employee',
-      permissions: ['view_profile', 'request_leave', 'view_own_documents', 'update_skills']
+      role: 'Employé',
+      permissions: ['voir_profil', 'demander_congé', 'voir_documents_personnels', 'mettre_à_jour_compétences']
     }
   ];
 }

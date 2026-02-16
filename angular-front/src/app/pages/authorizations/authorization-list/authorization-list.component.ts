@@ -14,7 +14,7 @@ interface Authorization {
     duration?: string;
     destination?: string;
     reason: string;
-    status: 'Approved' | 'Pending' | 'Rejected';
+    status: 'Approuvé' | 'En attente' | 'Rejeté';
     submittedAt: string;
 }
 
@@ -34,7 +34,7 @@ export class AuthorizationListComponent {
             date: '2024-03-15',
             duration: '2 heures',
             reason: 'Rendez-vous médical',
-            status: 'Pending',
+            status: 'En attente',
             submittedAt: '2024-03-14T10:00:00'
         },
         {
@@ -44,7 +44,7 @@ export class AuthorizationListComponent {
             date: '2024-03-20',
             destination: 'Tunis',
             reason: 'Formation professionnelle',
-            status: 'Approved',
+            status: 'Approuvé',
             submittedAt: '2024-03-10T14:30:00'
         },
         {
@@ -54,16 +54,16 @@ export class AuthorizationListComponent {
             date: '2024-03-16',
             duration: '3 heures',
             reason: 'Démarches administratives',
-            status: 'Pending',
+            status: 'En attente',
             submittedAt: '2024-03-15T09:15:00'
         }
     ];
 
     getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
         switch (status) {
-            case 'Approved': return 'success';
-            case 'Pending': return 'warning';
-            case 'Rejected': return 'error';
+            case 'Approuvé': return 'success';
+            case 'En attente': return 'warning';
+            case 'Rejeté': return 'error';
             default: return 'light';
         }
     }

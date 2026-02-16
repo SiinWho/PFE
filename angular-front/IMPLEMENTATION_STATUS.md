@@ -102,7 +102,7 @@
 - ✅ Conversation history
 - ✅ RAG-ready architecture
 
-### 7. Skills Management (Section 3.10)
+### 10. Skills Management (Section 3.10)
 - ✅ Skill catalog
 - ✅ Skill matrix with employee-skill mapping
 - ✅ Skill gap analysis
@@ -110,7 +110,7 @@
 - ✅ AI-powered employee-job matching
 - ✅ Skill level tracking (Beginner to Expert)
 
-### 8. CV Generator (Section 3.11) - UNIFIED
+### 11. CV Generator (Section 3.11) - UNIFIED
 - ✅ **Unified CV Builder**
   - Single corporate template (removed style selection)
   - Old CV upload functionality
@@ -121,44 +121,25 @@
 - ✅ Source document tracking
 - ✅ Version management
 
-### 9. Settings & Configuration
+### 12. Settings & Configuration
 - ✅ User management
 - ✅ Role management
 - ✅ Permissions configuration
 - ✅ Hierarchical role visualization
 
-### 10. Department Management
+### 13. Department Management
 - ✅ Department list
 - ✅ Department form (add/edit)
 
+### 14. Internationalisation (Section 4.0) - NOUVEAU ✅
+- ✅ **Traduction Complète en Français**
+  - Titres des routes traduits
+  - Menu de navigation latérale traduit
+  - Composants principaux traduits (Congés, Autorisations, Soldes, Formulaires, Workflows)
+  - Données mockées et statuts traduits (En attente, Approuvé, Rejeté, etc.)
+  - Logique de couleur des badges adaptée aux statuts français
+
 ## 🔄 Partially Implemented / Needs Enhancement
-
-### Dynamic Forms Module (Section 3.6)
-- ❌ Form builder interface (drag-and-drop)
-- ❌ Field type configuration
-- ❌ Validation rules editor
-- ❌ Column display management
-- ❌ Form templates library
-
-### Workflow Configuration Module (Section 3.7)
-- ⚠️ Basic workflow display exists
-- ❌ Visual workflow editor
-- ❌ Node management (add/remove/reorder)
-- ❌ Conditional routing
-- ❌ Multiple validators configuration
-- ❌ Escalation rules
-- ❌ Parallel/sequential validation options
-
-### Advanced Balance Management (Section 3.8)
-- ⚠️ Basic balance display exists
-- ❌ Balance dashboard with graphs
-- ❌ Automatic annual allocation
-- ❌ Manual adjustments with justification
-- ❌ Balance carryover configuration
-- ❌ Prorating based on hire date
-- ❌ Progressive acquisition rules
-- ❌ Audit trail for balance changes
-- ❌ Department-level reports
 
 ### Interface Configuration (Section 3.12)
 - ❌ Column show/hide functionality
@@ -284,6 +265,6 @@
 
 ---
 
-**Last Updated**: 2026-02-16
+**Last Updated**: 2026-02-16 (French Translation Completed)
 **Version**: 1.0
 **Status**: Active Development

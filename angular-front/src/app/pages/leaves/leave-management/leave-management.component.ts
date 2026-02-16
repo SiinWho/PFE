@@ -14,7 +14,7 @@ interface LeaveRequest {
     from: string;
     to: string;
     days: number;
-    status: 'Approved' | 'Pending' | 'Rejected';
+    status: 'Approuvé' | 'En attente' | 'Rejeté';
     reason: string;
     submittedAt: string;
     currentApprover?: string;
@@ -38,12 +38,12 @@ export class LeaveManagementComponent {
             id: 1,
             employee: 'Ahmed Ben Ali',
             employeeId: 1,
-            type: 'Annual',
+            type: 'Annuel',
             from: '2024-03-15',
             to: '2024-03-20',
             days: 5,
-            status: 'Pending',
-            reason: 'Family vacation trip to Hammamet.',
+            status: 'En attente', // Internal status remains English for logic, translated in template
+            reason: 'Voyage familial à Hammamet.',
             submittedAt: '2024-03-01T10:00:00',
             currentApprover: 'Sara Mansour (Manager)',
             balance: { total: 21, used: 5, remaining: 16 }
@@ -52,26 +52,26 @@ export class LeaveManagementComponent {
             id: 2,
             employee: 'Sara Mansour',
             employeeId: 2,
-            type: 'Sick',
+            type: 'Maladie',
             from: '2024-03-10',
             to: '2024-03-12',
             days: 2,
-            status: 'Pending',
-            reason: 'Medical consultation',
+            status: 'En attente',
+            reason: 'Consultation médicale',
             submittedAt: '2024-03-08T14:30:00',
-            currentApprover: 'HR Department',
+            currentApprover: 'Département RH',
             balance: { total: 10, used: 2, remaining: 8 }
         },
         {
             id: 3,
             employee: 'Leila Oueslati',
             employeeId: 4,
-            type: 'Annual',
+            type: 'Annuel',
             from: '2024-03-25',
             to: '2024-03-29',
             days: 5,
-            status: 'Pending',
-            reason: 'Personal matters',
+            status: 'En attente',
+            reason: 'Affaires personnelles',
             submittedAt: '2024-03-12T09:15:00',
             currentApprover: 'Sara Mansour (Manager)',
             balance: { total: 21, used: 10, remaining: 11 }
@@ -82,14 +82,14 @@ export class LeaveManagementComponent {
         pending: 3,
         approved: 12,
         rejected: 1,
-        avgProcessingTime: '1.5 days'
+        avgProcessingTime: '1.5 jours'
     };
 
     getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
         switch (status) {
-            case 'Approved': return 'success';
-            case 'Pending': return 'warning';
-            case 'Rejected': return 'error';
+            case 'Approuvé': return 'success';
+            case 'En attente': return 'warning';
+            case 'Rejeté': return 'error';
             default: return 'light';
         }
     }
@@ -97,7 +97,7 @@ export class LeaveManagementComponent {
     approveRequest(id: number) {
         const request = this.pendingRequests.find(r => r.id === id);
         if (request) {
-            request.status = 'Approved';
+            request.status = 'Approuvé';
             console.log(`Approved leave request #${id}`);
         }
     }
@@ -105,7 +105,7 @@ export class LeaveManagementComponent {
     rejectRequest(id: number) {
         const request = this.pendingRequests.find(r => r.id === id);
         if (request) {
-            request.status = 'Rejected';
+            request.status = 'Rejeté';
             console.log(`Rejected leave request #${id}`);
         }
     }

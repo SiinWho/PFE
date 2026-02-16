@@ -117,10 +117,10 @@
           <app-button [routerLink]="['/leaves', request.id]" variant="outline" size="sm">
             Voir Détails
           </app-button>
-          <app-button (btnClick)="approveRequest(request.id)" size="sm" *ngIf="request.status === 'Pending'">
+          <app-button (btnClick)="approveRequest(request.id)" size="sm" *ngIf="request.status === 'En attente'">
             Approuver
           </app-button>
-          <app-button (btnClick)="rejectRequest(request.id)" variant="outline" size="sm" *ngIf="request.status === 'Pending'">
+          <app-button (btnClick)="rejectRequest(request.id)" variant="outline" size="sm" *ngIf="request.status === 'En attente'">
             Rejeter
           </app-button>
         </div>

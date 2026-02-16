@@ -58,37 +58,37 @@ export const routes: Routes = [
         component: EcommerceComponent,
         pathMatch: 'full',
         title:
-          'Angular Ecommerce Dashboard | ASM Portal',
+          'Tableau de Bord E-commerce | Portail ASM',
       },
       {
         path: 'employees',
         component: EmployeeListComponent,
-        title: 'Employees | ASM Portal'
+        title: 'Employés | Portail ASM'
       },
       {
         path: 'employees/add',
         component: EmployeeFormComponent,
-        title: 'Add Employee | ASM Portal'
+        title: 'Ajouter un Employé | Portail ASM'
       },
       {
         path: 'employees/edit/:id',
         component: EmployeeFormComponent,
-        title: 'Edit Employee | ASM Portal'
+        title: 'Modifier un Employé | Portail ASM'
       },
       {
         path: 'employees/:id',
         component: EmployeeDetailComponent,
-        title: 'Employee Details | ASM Portal'
+        title: 'Détails Employé | Portail ASM'
       },
       {
         path: 'calendar',
         component: CalenderComponent,
-        title: 'Calendar | ASM Portal'
+        title: 'Calendrier | Portail ASM'
       },
       {
         path: 'profile',
         component: ProfileComponent,
-        title: 'Profile | ASM Portal'
+        title: 'Profil | Portail ASM'
       },
       {
         path: 'form-elements',
@@ -154,77 +154,77 @@ export const routes: Routes = [
       {
         path: 'departments',
         children: [
-          { path: '', component: DepartmentListComponent, title: 'Departments | ASM' },
-          { path: 'new', component: DepartmentFormComponent, title: 'Add Department | ASM' },
-          { path: ':id/edit', component: DepartmentFormComponent, title: 'Edit Department | ASM' }
+          { path: '', component: DepartmentListComponent, title: 'Départements | ASM' },
+          { path: 'new', component: DepartmentFormComponent, title: 'Ajouter Département | ASM' },
+          { path: ':id/edit', component: DepartmentFormComponent, title: 'Modifier Département | ASM' }
         ]
       },
       {
         path: 'leaves',
         children: [
-          { path: '', component: LeaveListComponent, title: 'Leaves | ASM' },
-          { path: 'management', component: LeaveManagementComponent, title: 'Leave Management | ASM' },
-          { path: 'balances', component: BalanceDashboardComponent, title: 'Balance Dashboard | ASM' },
-          { path: 'calendar', component: LeaveCalendarComponent, title: 'Leave Calendar | ASM' },
-          { path: 'types', component: LeaveTypesComponent, title: 'Leave Types | ASM' },
-          { path: ':id', component: LeaveDetailComponent, title: 'Leave Details | ASM' }
+          { path: '', component: LeaveListComponent, title: 'Congés | ASM' },
+          { path: 'management', component: LeaveManagementComponent, title: 'Gestion des Congés | ASM' },
+          { path: 'balances', component: BalanceDashboardComponent, title: 'Tableau de Bord des Soldes | ASM' },
+          { path: 'calendar', component: LeaveCalendarComponent, title: 'Calendrier des Congés | ASM' },
+          { path: 'types', component: LeaveTypesComponent, title: 'Types de Congés | ASM' },
+          { path: ':id', component: LeaveDetailComponent, title: 'Détails Congé | ASM' }
         ]
       },
       {
         path: 'authorizations',
         children: [
-          { path: '', component: AuthorizationListComponent, title: 'Authorizations | ASM' }
+          { path: '', component: AuthorizationListComponent, title: 'Autorisations | ASM' }
         ]
       },
       {
         path: 'forms',
         children: [
-          { path: 'builder', component: FormBuilderComponent, title: 'Form Builder | ASM' }
+          { path: 'builder', component: FormBuilderComponent, title: 'Créateur de Formulaires | ASM' }
         ]
       },
       {
         path: 'workflows',
         children: [
-          { path: 'editor', component: WorkflowEditorComponent, title: 'Workflow Editor | ASM' }
+          { path: 'editor', component: WorkflowEditorComponent, title: 'Éditeur de Workflow | ASM' }
         ]
       },
       {
         path: 'documents',
         children: [
           { path: '', component: DocumentListComponent, title: 'Documents | ASM' },
-          { path: 'categories', component: DocumentCategoriesComponent, title: 'Document Categories | ASM' },
-          { path: 'upload', component: DocumentUploadComponent, title: 'Upload Document | ASM' },
-          { path: ':id', component: DocumentDetailComponent, title: 'Document Details | ASM' }
+          { path: 'categories', component: DocumentCategoriesComponent, title: 'Catégories de Documents | ASM' },
+          { path: 'upload', component: DocumentUploadComponent, title: 'Téléverser un Document | ASM' },
+          { path: ':id', component: DocumentDetailComponent, title: 'Détails Document | ASM' }
         ]
       },
       {
         path: 'ai',
         children: [
-          { path: 'chat', component: AiChatComponent, title: 'AI Assistant | ASM' },
-          { path: 'history', component: ConversationHistoryComponent, title: 'Conversation History | ASM' }
+          { path: 'chat', component: AiChatComponent, title: 'Assistant IA | ASM' },
+          { path: 'history', component: ConversationHistoryComponent, title: 'Historique des Conversations | ASM' }
         ]
       },
       {
         path: 'skills',
         children: [
-          { path: 'catalog', component: SkillCatalogComponent, title: 'Skill Catalog | ASM' },
-          { path: 'matrix', component: SkillMatrixComponent, title: 'Skill Matrix | ASM' },
-          { path: 'gap-analysis', component: SkillGapAnalysisComponent, title: 'Skill Gap Analysis | ASM' },
-          { path: 'cv-extraction', component: CvExtractionComponent, title: 'CV Extraction | ASM' }
+          { path: 'catalog', component: SkillCatalogComponent, title: 'Catalogue de Compétences | ASM' },
+          { path: 'matrix', component: SkillMatrixComponent, title: 'Matrice de Compétences | ASM' },
+          { path: 'gap-analysis', component: SkillGapAnalysisComponent, title: 'Analyse des Écarts | ASM' },
+          { path: 'cv-extraction', component: CvExtractionComponent, title: 'Extraction CV | ASM' }
         ]
       },
       {
         path: 'cv-generator',
         children: [
-          { path: '', component: CvBuilderComponent, title: 'CV Builder | ASM' },
-          { path: 'history', component: CvHistoryComponent, title: 'CV History | ASM' }
+          { path: '', component: CvBuilderComponent, title: 'Générateur de CV | ASM' },
+          { path: 'history', component: CvHistoryComponent, title: 'Historique CV | ASM' }
         ]
       },
       {
         path: 'settings',
         children: [
-          { path: 'users', component: UsersComponent, title: 'Users | ASM' },
-          { path: 'roles', component: RolesComponent, title: 'Roles | ASM' },
+          { path: 'users', component: UsersComponent, title: 'Utilisateurs | ASM' },
+          { path: 'roles', component: RolesComponent, title: 'Rôles | ASM' },
           { path: 'permissions', component: PermissionsComponent, title: 'Permissions | ASM' }
         ]
       },
@@ -233,12 +233,12 @@ export const routes: Routes = [
   {
     path: 'signin',
     component: SignInComponent,
-    title: 'Sign In | ASM Portal'
+    title: 'Connexion | Portail ASM'
   },
   {
     path: 'signup',
     component: SignUpComponent,
-    title: 'Sign Up | ASM Portal'
+    title: 'Inscription | Portail ASM'
   },
   {
     path: '**',

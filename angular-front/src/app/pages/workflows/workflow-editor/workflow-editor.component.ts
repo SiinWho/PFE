@@ -24,7 +24,7 @@ interface WorkflowTemplate {
     category: string;
     nodes: WorkflowNode[];
     connections: { from: string; to: string }[];
-    status: 'Active' | 'Draft' | 'Archived';
+    status: 'Brouillon' | 'Actif' | 'Archivé';
     createdAt: string;
     updatedAt: string;
 }
@@ -68,7 +68,7 @@ export class WorkflowEditorComponent {
                 { from: 'manager', to: 'hr' },
                 { from: 'hr', to: 'end' }
             ],
-            status: 'Active',
+            status: 'Actif',
             createdAt: '2024-01-10T10:00:00',
             updatedAt: '2024-02-05T14:30:00'
         },
@@ -93,7 +93,7 @@ export class WorkflowEditorComponent {
                 { from: 'finance', to: 'direction' },
                 { from: 'direction', to: 'end' }
             ],
-            status: 'Active',
+            status: 'Actif',
             createdAt: '2024-01-15T11:00:00',
             updatedAt: '2024-01-15T11:00:00'
         }
@@ -115,7 +115,7 @@ export class WorkflowEditorComponent {
                 { id: 'end', type: 'end', label: 'Fin', actions: [], position: { x: 700, y: 100 } }
             ],
             connections: [],
-            status: 'Draft',
+            status: 'Brouillon',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };
@@ -175,9 +175,9 @@ export class WorkflowEditorComponent {
 
     getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
         switch (status) {
-            case 'Active': return 'success';
-            case 'Draft': return 'warning';
-            case 'Archived': return 'light';
+            case 'Actif': return 'success';
+            case 'Brouillon': return 'warning';
+            case 'Archivé': return 'light';
             default: return 'light';
         }
     }
@@ -197,7 +197,7 @@ export class WorkflowEditorComponent {
             ...JSON.parse(JSON.stringify(workflow)),
             id: Math.max(...this.workflows.map(w => w.id)) + 1,
             name: `${workflow.name} (Copie)`,
-            status: 'Draft',
+            status: 'Brouillon',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };
@@ -205,7 +205,7 @@ export class WorkflowEditorComponent {
     }
 
     archiveWorkflow(workflow: WorkflowTemplate) {
-        workflow.status = 'Archived';
+        workflow.status = 'Archivé';
         workflow.updatedAt = new Date().toISOString();
     }
 }

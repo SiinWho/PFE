@@ -31,7 +31,7 @@ interface FormTemplate {
     createdAt: string;
     updatedAt: string;
     version: number;
-    status: 'Draft' | 'Active' | 'Archived';
+    status: 'Brouillon' | 'Actif' | 'Archivé';
 }
 
 @Component({
@@ -70,7 +70,7 @@ export class FormBuilderComponent {
             createdAt: '2024-01-15T10:00:00',
             updatedAt: '2024-02-10T14:30:00',
             version: 2,
-            status: 'Active'
+            status: 'Actif'
         },
         {
             id: 2,
@@ -87,7 +87,7 @@ export class FormBuilderComponent {
             createdAt: '2024-02-01T09:00:00',
             updatedAt: '2024-02-01T09:00:00',
             version: 1,
-            status: 'Active'
+            status: 'Actif'
         },
         {
             id: 3,
@@ -104,7 +104,7 @@ export class FormBuilderComponent {
             createdAt: '2024-01-05T11:00:00',
             updatedAt: '2024-01-20T16:00:00',
             version: 3,
-            status: 'Active'
+            status: 'Actif'
         }
     ];
 
@@ -124,7 +124,7 @@ export class FormBuilderComponent {
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             version: 1,
-            status: 'Draft'
+            status: 'Brouillon'
         };
         this.selectedFields = [];
     }
@@ -183,9 +183,9 @@ export class FormBuilderComponent {
 
     getStatusColor(status: string): 'success' | 'warning' | 'error' | 'light' {
         switch (status) {
-            case 'Active': return 'success';
-            case 'Draft': return 'warning';
-            case 'Archived': return 'light';
+            case 'Actif': return 'success';
+            case 'Brouillon': return 'warning';
+            case 'Archivé': return 'light';
             default: return 'light';
         }
     }
@@ -195,7 +195,7 @@ export class FormBuilderComponent {
             ...form,
             id: Math.max(...this.formTemplates.map(f => f.id)) + 1,
             name: `${form.name} (Copie)`,
-            status: 'Draft',
+            status: 'Brouillon',
             version: 1,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
@@ -204,7 +204,7 @@ export class FormBuilderComponent {
     }
 
     archiveForm(form: FormTemplate) {
-        form.status = 'Archived';
+        form.status = 'Archivé';
         form.updatedAt = new Date().toISOString();
     }
 }
